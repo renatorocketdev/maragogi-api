@@ -1,0 +1,165 @@
+﻿<main role="main">
+    <div class="jumbotron mt-2 pb-3 pt-2 pl-2 pr-2">
+        @using (Html.BeginForm("Add", "Empresa", FormMethod.Post, new { enctype = "application/x-www-form-urlencoded" }))
+        {
+            <div class="card p-2">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="validationServer01">Nome da Empresa</label>
+                        <input id="nomeEmpresa" type="text" class="form-control" placeholder="Empresa" name="nomeEmpresa" value="@Request.Form["nomeEmpresa"]" maxlength="50" required>
+                    </div>
+                    <div class="col">
+                        <label for="validationServer02">Endereço</label>
+                        <input disabled id="Endereco" type="text" class="form-control" placeholder="Endereço" name="Endereco" value="@Request.Form["Endereco"]" maxlength="200" required>
+                    </div>
+
+                    <div class="col">
+                        <label for="validationServer01">Telefone 1</label>
+                        <input disabled id="Telef1" type="text" class="form-control" placeholder="Telefone 1" name="Telefone1Empresa" value="@Request.Form["Telef1"]" maxlength="50" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-2 mt-2" id="sobreEmpresa">
+                <div class="form-row">
+                    <div class="col-12">
+                        <label for="validationTextarea">Fale sobre o estabelecimento, bem como cardápio e etc..</label>
+                        <textarea class="form-control" id="validationTextarea" placeholder="Sobre a empresa" name="sobreEmpresa" value="@Request.Form["sobreEmpresa"]" maxlength="10000" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-2 mt-2" id="CarServ">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="validationServer01">Característica  1</label>
+                        <input type="text" class="form-control" id="validationServer01" placeholder="Característica" name="Carac1" maxlength="50" value="@Request.Form["Carac1"]" required>
+                    </div>
+                    <div class="col">
+                        <label for="validationServer01">Serviço 1</label>
+                        <input id="Serv1" type="text" class="form-control" placeholder="Serviços" name="Serv1" value="@Request.Form["Serv1"]" maxlength="50" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-2 mt-2" id="token">
+                <div class="form-row">
+                    <div class="col">
+                        <select class="custom-select mt-2" id="Categ" name="MainCategoria" required>
+                            <option value="">Selecione a categoria principal da empresa</option>
+                            @{
+                                List<Categorias> Main = ViewBag.MainCategoria;
+
+                                foreach (var item in Main)
+                                {
+                                    <option value="@item.MainCategoria">@item.MainCategoria</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col">
+                        <select class="custom-select mt-2" id="Categ" name="SubCategoria" required>
+                            <option value="">Selecione a categoria secundaria da empresa</option>
+                            @{
+                                List<Categorias> Sub = ViewBag.SubCategoria;
+
+                                foreach (var item in Sub)
+                                {
+                                    <option value="@item.MainCategoria">@item.SubCategoria</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="alert alert-warning p-2 mt-2" role="alert">
+                        <p><i class="fa fa-warning"></i>IMPORTANTE!</p>
+                        <p>Para incluir um vídeo, abra-o no youtube, clique em compartilhar, em seguida incorporar, selecione apenas o que esta dentro de src=""!!!</p>
+                    </div>
+                </div>
+
+                <div class="form-row mt-2">
+                    <div class="col">
+                        <input class="form-control" name="Video" placeholder="Video Embed" />
+                    </div>
+
+                    <div class="col">
+                        <input class="form-control" name="Token" placeholder="Token de Segurança" />
+                    </div>
+                </div>
+
+                <div class="form-row p-2 mt-2">
+                    <div class="col-12 mt-2">
+                        <input class="btn btn-primary col-12" type="submit" value="Upload" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col text-center">
+                <div id="maisItens" class="btn btn-secondary p-0 col-4 text-center mt-2">
+                    <i class="fa fa-chevron-circle-down text-white"></i>
+                </div>
+            </div>
+
+
+            <div class="card p-2 mt-2" id="Contatos">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="validationServer02">Telefone 2</label>
+                        <input type="text" class="form-control" id="validationServer02" placeholder="Telefone 2" name="Telefone2Empresa" value="@Request.Form["Telef2"]" maxlength="50">
+                    </div>
+                    <div class="col">
+                        <label for="validationServer01">Facebook</label>
+                        <input type="text" class="form-control" id="validationServer01" placeholder="Facebook" name="Facebook" value="@Request.Form["Facebook"]" maxlength="50">
+                    </div>
+                    <div class="col">
+                        <label for="validationServer02">Instagram</label>
+                        <input type="text" class="form-control" id="validationServer02" placeholder="Instagram" name="Instagram" value="@Request.Form["Instagram"]" maxlength="50">
+                    </div>
+                    <div class="col">
+                        <label for="validationServer01">Site</label>
+                        <input type="text" class="form-control" id="validationServer01" placeholder="Site" name="Site" value="@Request.Form["Site"]" maxlength="50">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-2 mt-2" id="Carac">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="validationServer02">Característica 2</label>
+                        <input type="text" class="form-control" id="validationServer02" placeholder="Característica" name="Carac2" maxlength="50" value="@Request.Form["Carac2"]">
+                    </div>
+                    <div class="col">
+                        <label for="validationServer01">Característica 3</label>
+                        <input type="text" class="form-control" id="validationServer01" placeholder="Característica" name="Carac3" maxlength="50" value="@Request.Form["Carac3"]">
+                    </div>
+                    <div class="col">
+                        <label for="validationServer01">Característica 4</label>
+                        <input type="text" class="form-control" id="validationServer01" placeholder="Característica" name="Carac4" maxlength="50" value="@Request.Form["Carac4"]">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-2 mt-2" id="Serv">
+                <div class="form-row">
+                    <div class="co">
+                        <label for="validationServer02">Serviços 2</label>
+                        <input type="text" class="form-control" id="validationServer02" placeholder="Serviços" name="Serv2" value="@Request.Form["Serv2"]" maxlength="50">
+                    </div>
+                    <div class="col">
+                        <label for="validationServer01">Serviços 3</label>
+                        <input type="text" class="form-control" id="validationServer01" placeholder="Serviços" name="Serv3" value="@Request.Form["Serv3"]" maxlength="50">
+                    </div>
+                    <div class="col">
+                        <label for="validationServer01">Serviços 4</label>
+                        <input type="text" class="form-control" id="validationServer01" placeholder="Serviços" name="Serv4" value="@Request.Form["Serv4"]" maxlength="50">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</main>
+
+<a href="@Url.Action("Index", "Empresa")" class="text-primary">Voltar</a>

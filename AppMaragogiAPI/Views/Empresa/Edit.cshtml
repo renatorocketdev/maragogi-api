@@ -1,0 +1,146 @@
+﻿@model AppMaragogiAPI.Empresa
+
+    <main role="main">
+        <div class="jumbotron pt-1 pb-4">
+            <div class="card p-3 mt-3">
+                @using (Html.BeginForm("Edit", "Empresa", FormMethod.Post))
+                {
+                    <input class="invisible" type="text" name="IdEmpresa" value="@Model.IdEmpresa" />
+
+                    <input hidden="hidden" name="OldSubCategoria" value="@Model.SubCategoria">
+                    <input hidden="hidden" name="OldName" value="@Model.NomeEmpresa">
+
+                    <div class="form-row">
+                        <div class="col-6">
+                            <label for="validationServer01">Nome da Empresa</label>
+                            <input type="text" class="form-control" id="validationServer01" placeholder="Empresa" name="nomeEmpresa" value="@Model.NomeEmpresa" maxlength="50" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="validationServer02">Endereço</label>
+                            <input type="text" class="form-control" id="validationServer02" placeholder="Endereço" name="Endereco" value="@Model.Endereco" maxlength="50" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-6">
+                            <label for="validationServer01">Telefone 1</label>
+                            <input type="text" class="form-control" id="validationServer01" placeholder="Telefone 1" name="Telefone1Empresa" value="@Model.Telefone1Empresa" maxlength="50" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="validationServer02">Telefone 2</label>
+                            <input type="text" class="form-control" id="validationServer02" placeholder="Telefone 2" name="Telefone2Empresa" value="@Model.Telefone2Empresa" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-4">
+                            <label for="validationServer01">Facebook</label>
+                            <input type="text" class="form-control" id="validationServer01" placeholder="Facebook" name="Facebook" value="@Model.Facebook" maxlength="50">
+                        </div>
+                        <div class="col-4">
+                            <label for="validationServer02">Instagram</label>
+                            <input type="text" class="form-control" id="validationServer02" placeholder="Instagram" name="Instagram" value="@Model.Instagram" maxlength="50">
+                        </div>
+                        <div class="col-4">
+                            <label for="validationServer01">Site</label>
+                            <input type="text" class="form-control" id="validationServer01" placeholder="Site" name="Site" value="@Model.Site" maxlength="50">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12">
+                            <label for="validationTextarea">Fale sobre o estabelecimento, bem como cardápio e etc..</label>
+                            <textarea class="form-control" id="validationTextarea" placeholder="Sobre a empresa" name="sobreEmpresa" maxlength="255" required>@Model.SobreEmpresa</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-3">
+                            <label for="validationServer01">Característica  1</label>
+                            <input type="text" class="form-control" id="validationServer01" placeholder="Característica" name="Carac1" maxlength="50" value="@Model.Carac1" required>
+                        </div>
+                        <div class="col-3">
+                            <label for="validationServer02">Característica 2</label>
+                            <input type="text" class="form-control" id="validationServer02" placeholder="Característica" name="Carac2" maxlength="50" value="@Model.Carac2">
+                        </div>
+                        <div class="col-3">
+                            <label for="validationServer01">Característica 3</label>
+                            <input type="text" class="form-control" id="validationServer01" placeholder="Característica" name="Carac3" maxlength="50" value="@Model.Carac3">
+                        </div>
+                        <div class="col-3">
+                            <label for="validationServer01">Característica 4</label>
+                            <input type="text" class="form-control" id="validationServer01" placeholder="Característica" name="Carac4" maxlength="50" value="@Model.Carac4">
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-3">
+                            <label for="validationServer01">Serviços  1</label>
+                            <input type="text" class="form-control" id="validationServer01" placeholder="Serviços" name="Serv1" maxlength="50" value="@Model.Serv1" required>
+                        </div>
+                        <div class="col-3">
+                            <label for="validationServer02">Serviços 2</label>
+                            <input type="text" class="form-control" id="validationServer02" placeholder="Serviços" name="Serv2" maxlength="50" value="@Model.Serv2">
+                        </div>
+                        <div class="col-3">
+                            <label for="validationServer01">Serviços 3</label>
+                            <input type="text" class="form-control" id="validationServer01" placeholder="Serviços" name="Serv3" maxlength="50" value="@Model.Serv3">
+                        </div>
+                        <div class="col-3">
+                            <label for="validationServer01">Serviços 4</label>
+                            <input type="text" class="form-control" id="validationServer01" placeholder="Serviços" name="Serv4" maxlength="50" value="@Model.Serv4">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <select class="custom-select mt-2" id="Categ" name="MainCategoria" required>
+                                <option selected>@Model.MainCategoria</option>
+                                <option value="">Selecione a categoria da empresa</option>
+                                @{
+                                    List<Categorias> Main = ViewBag.MainCategoria;
+
+                                    foreach (var item in Main)
+                                    {
+                                        <option value="@item.MainCategoria">@item.MainCategoria</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <select class="custom-select mt-2" id="Categ" name="SubCategoria" required>
+                                <option selected>@Model.SubCategoria</option>
+                                <option value="">Selecione a categoria da empresa</option>
+                                @{
+                                    List<Categorias> Sub = ViewBag.SubCategoria;
+
+                                    foreach (var item in Sub)
+                                    {
+                                        <option value="@item.MainCategoria">@item.SubCategoria</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col">
+                            <input class="form-control" name="Video" placeholder="Video Embed" />
+                        </div>
+
+                        <div class="col">
+                            <input class="form-control" name="Token" placeholder="Token de Segurança" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 mt-2">
+                            <a href="@Url.Action("Index", "Empresa")" class="text-primary">Voltar</a>
+                            <input class="col-11 btn btn-primary" type="submit" value="Editar" />
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </main>

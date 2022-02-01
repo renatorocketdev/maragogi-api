@@ -1,0 +1,67 @@
+﻿<div class="mt-2">
+    @using (Html.BeginForm("Index", "Categorias", FormMethod.Post))
+    {
+        <div class="form-row">
+            <div class="col">
+                <input type="text" class="form-control mt-2" id="validationServer01" placeholder="SubCategoria" name="SubCategoria" value="@Request.Form["nomeEmpresa"]" maxlength="50">
+            </div>
+            <div class="col">
+                <select class="custom-select mt-2" id="Categ" name="MainCategoria">
+                    <option class="bg-secondary text-white" value="">Selecione a categoria da empresa</option>
+                    @{
+                        List<string> Main = ViewBag.MainCategoria;
+
+                        foreach (var item in Main)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row mt-2">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary col-12">Pesquisar</button>
+            </div>
+        </div>
+    }
+</div>
+
+@if (IsPost)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">SubCategoria</th>
+                <th scope="col">Fotos</th>
+                <th scope="col">Icone</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+
+                List<Categorias> categorias = ViewBag.Categorias;
+
+                foreach (var item in categorias)
+                {
+                        <tr>
+                            <th><p class="font-weight-bold text-black-50">@item.CategoriaId</p></th>
+                            <td><p class="font-weight-bold text-black-50">@item.MainCategoria</p></td>
+                            <td><p class="font-weight-bold text-black-50">@item.SubCategoria</p></td>
+                            <td><p class="font-weight-bold text-black-50"><a class="text-primary" href="@Url.Action("EditImages", "Categorias", new { id =item.CategoriaId})"><i class="fa fa-edit"></i></a></p></td>
+                            <td><p class="font-weight-bold text-black-50"><a class="text-primary" href="@Url.Action("EditIcon", "Categorias", new { id =item.CategoriaId})"><i class="fa fa-edit"></i></a></p></td>
+                            <td><p class="font-weight-bold text-black-50"><a class="text-primary" href="@Url.Action("Edit", "Categorias", new { id =item.CategoriaId})"><i class="fa fa-edit"></i></a></p></td>
+                            <td><p class="font-weight-bold text-black-50"><a class="text-primary" href="@Url.Action("Delete", "Categorias", new { Id = item.CategoriaId})"><i class="fa fa-trash"></i></a></p></td>
+                        </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+<a href="@Url.Action("Index", "Categorias")" class="text-primary">Voltar</a>

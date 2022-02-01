@@ -1,0 +1,178 @@
+﻿@{
+    Layout = null;
+
+    var styleBG = "background-color:";
+    var styleColor = "color:";
+
+    var PrimaryColor = "#57A695";
+    var SecundaryColor = "#9DD3AF";
+    var LinkColor = "#FFF";
+
+    AppMaragogiDB db = new AppMaragogiDB();
+
+    db.Database.Connection.Open();
+    string cmdSelect = string.Format("SELECT * FROM Empresa WHERE IdEmpresa='{0}'", ViewBag.Id);
+
+    AppMaragogiAPI.Empresa tste = db.Empresa.SqlQuery(cmdSelect).SingleOrDefault();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <link href="~/Content/clean-blog.css" rel="stylesheet" />
+    <link href="~/Content/Custom.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="@Url.Action("", "Home", null)">App Maragogi</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        @Html.ActionLink("Empresas", "Empresas", null, null);
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead m-0" id="HeaderPrincipal">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="site-heading">
+                        <img class="mt-2 p-2 col-12" src="@tste.LinkIcon" alt="" style="height:30%;width:30%">
+                        <h4 class="masthead-heading text-uppercase mb-0">@tste.NomeEmpresa</h4>
+                        <h5 class="subheading font-weight-light mb-3 mt-0">@tste.Categoria</h5>
+                        <div class="divider-custom divider-light">
+                            <div class="divider-custom-icon">
+                                <i class="fa fa-star" style="color:gold"></i>
+                                <i class="fa fa-star" style="color:gold"></i>
+                                <i class="fa fa-star" style="color:gold"></i>
+                                <i class="fa fa-star" style="color:gold"></i>
+                                <i class="fa fa-star" style="color:gold"></i>
+                            </div>
+                        </div>
+                        <h5 class="text-center mt-3">@tste.SobreEmpresa</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid m-0" id="containerDescricao">
+        <div class="container row col">
+            <div class="col-6 text-white">
+                <h3>Caracteristicas</h3>
+                <h6><i class="fa fa-star" style="color:gold"></i> @tste.Carac1</h6>
+                @{
+                    if (!string.IsNullOrEmpty(tste.Carac2))
+                    {
+                        <h6><i class="fa fa-star" style="color:gold"></i>@tste.Carac2</h6>
+                    }
+
+                    if (!string.IsNullOrEmpty(tste.Carac3))
+                    {
+                        <h6><i class="fa fa-star" style="color:gold"></i> @tste.Carac3</h6>
+                    }
+
+
+                    if (!string.IsNullOrEmpty(tste.Carac4))
+                    {
+                        <h6><i class="fa fa-star" style="color:gold"></i> @tste.Carac4</h6>
+                    }
+                }
+
+            </div>
+            <div class="col-6 text-white">
+                <h3>Serviços</h3>
+                <h6><i class="fa fa-star" style="color:gold"></i> @tste.Serv1</h6>
+                @{
+                    if (!string.IsNullOrEmpty(tste.Serv2))
+                    {
+                        <h6><i class="fa fa-star" style="color:gold"></i>@tste.Serv2</h6>
+                    }
+
+                    if (!string.IsNullOrEmpty(tste.Serv3))
+                    {
+                        <h6><i class="fa fa-star" style="color:gold"></i> @tste.Serv3</h6>
+                    }
+
+
+                    if (!string.IsNullOrEmpty(tste.Serv4))
+                    {
+                        <h6><i class="fa fa-star" style="color:gold"></i> @tste.Serv4</h6>
+                    }
+
+                }
+            </div>
+        </div>
+
+        <div class="container row col">
+            <div class="mt-5 col-12" id="separador"></div>
+        </div> 
+        
+        <div class="container row col">
+            <div class="col-4 text-white">
+                <h3>Telefone</h3>
+                <h6><i class="fa fa-phone"></i> @tste.Telefone1Empresa</h6>
+                @{
+                    if (!string.IsNullOrEmpty(tste.Telefone2Empresa))
+                    {
+                        <h6><i class="fa fa-phone"></i> @tste.Telefone2Empresa</h6>
+                    }
+                }
+            </div>
+
+            <div class="col-4 text-white">
+                @{
+                    if (!string.IsNullOrEmpty(tste.Facebook) && !string.IsNullOrEmpty(tste.Instagram))
+                    {
+                        <h3>Social</h3>
+
+                        if (!string.IsNullOrEmpty(tste.Facebook))
+                        {
+                            <h6><a class="text-white" href="@tste.Facebook"><i class="fa fa-facebook-square"></i> Facebook</a></h6>
+                        }
+
+                        if (!string.IsNullOrEmpty(tste.Instagram))
+                        {
+                            <h6><a class="text-white" href="@tste.Facebook"><i class="fa fa-instagram"></i>  Instagram</a></h6>
+                        }
+                    }
+                }
+            </div>
+
+            <div class="col-4 text-white">
+                @{
+                    if (!string.IsNullOrEmpty(tste.Site))
+                    {
+                        <h3>Site</h3>
+                        <h6><a class="text-white" href="@tste.Site"> @tste.NomeEmpresa</a></h6>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    @{db.Database.Connection.Close();}
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Panel</title>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="~/Content/panel.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg bg-primary m-0">
+                <div class="container-fluid">
+                    <h3 class="text-left text-white">Maragogi API</h3>
+                </div>
+            </nav>
+
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/popper.js"></script>
+    <script src="~/Scripts/Site.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+﻿@model AppMaragogiAPI.HistoriaMaragogi
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "HistoriaMaragogi", FormMethod.Post, new { enctype = "application/x-www-form-urlencoded" }))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>HistoriaMaragogi</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.HistoriaMaragogiId)
+
+    <div class="alert alert-warning" role="alert">
+        <p><i class="fa fa-warning"></i>IMPORTANTE!</p>
+        <p>Para incluir um vídeo, abra-o no youtube, clique em compartilhar, em seguida incorporar, selecione apenas o que esta dentro de src=""!!!</p>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.UrlVideo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col">
+            @Html.EditorFor(model => model.UrlVideo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UrlVideo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col">
+            @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col">
+            @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Area, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col">
+            @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Populacao, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col">
+            @Html.EditorFor(model => model.Populacao, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Populacao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Clima, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col">
+            @Html.EditorFor(model => model.Clima, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Clima, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DistanciaMaceio, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col">
+            @Html.EditorFor(model => model.DistanciaMaceio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DistanciaMaceio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DistanciaRecife, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col">
+            @Html.EditorFor(model => model.DistanciaRecife, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DistanciaRecife, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Acesso, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col">
+            @Html.EditorFor(model => model.Acesso, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Acesso, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Localizacao, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col">
+            @Html.EditorFor(model => model.Localizacao, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Localizacao, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" name="Token" placeholder="Token de Segurança" />
+    </div>
+
+    <div class="form-group">
+        <div class="col-12">
+            <a href="@Url.Action("Panel", "Home")" class="text-primary">Voltar</a>
+            <input type="submit" value="Adicionar" class="col-11 btn btn-primary" />
+        </div>
+    </div>
+</div>
+}

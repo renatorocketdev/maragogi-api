@@ -1,0 +1,55 @@
+﻿@model AppMaragogiAPI.CategoriasMaragogi
+@using AppMaragogiAPI.Controllers;
+
+@{
+    FotoController ft = new FotoController();
+    int ExistImage = ft.GetQtdFotoFundoMaragogi();
+    string[] PathImages = ft.GetPathFundoMaragogi();
+}
+
+@{
+    if (ExistImage != 0)
+    {
+        <div class="col text-center">
+            @{
+                for (int i = 0; i < PathImages.Length; i++)
+                {
+                    string CompletePath = "../../" + PathImages[i].Substring(PathImages[i].LastIndexOf("Uploads"));
+
+                    <img src="@CompletePath" class="col card-img-top mt-5" style="height:250px; width:250px">
+                }
+            }
+        </div>
+    }
+    else
+    {
+        <div class="col-10 offset-1 mt-5">
+            <div class="alert alert-warning text-center" role="alert">
+                <b>Nenhuma Logo</b>
+            </div>
+        </div>
+    }
+}
+
+@using (Html.BeginForm("EditFundoMaragogi", "FundoCategoriasMaragogi", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Token, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col">
+            @Html.EditorFor(model => model.Token, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Token, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button class="btn btn-outline-success" type="submit" id="inputGroupFileAddon03">Enviar</button>
+        </div>
+        <div class="custom-file">
+            <input type="file" name="file" class="custom-file-input" id="inputGroupFile03" multiple>
+            <label class="custom-file-label" for="inputGroupFile03">Escolha ós arquivo</label>
+        </div>
+    </div>
+}
+
+<a href="@Url.Action("Index", "CategoriasMaragogi")" class="text-primary">Voltar</a>

@@ -1,0 +1,29 @@
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Images</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Deletar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            List<CategoriasMaragogi> Categorias = ViewBag.Categorias;
+
+            foreach (var item in Categorias)
+            {
+                <tr>
+                    <th><p class="font-weight-bold text-black-50">@item.CategoriaMaragogiId</p></th>
+                    <th><p class="font-weight-bold text-black-50">@item.Nome</p></th>
+                    <td><p class="font-weight-bold text-black-50"><a class="text-primary" href="@Url.Action("EditImages", "CategoriasMaragogi", new { id =item.CategoriaMaragogiId})"><i class="fa fa-edit"></i></a></p></td>
+                    <td><p class="font-weight-bold text-black-50"><a class="text-primary" href="@Url.Action("Edit", "CategoriasMaragogi", new { id =item.CategoriaMaragogiId})"><i class="fa fa-edit"></i></a></p></td>
+                    <td><p class="font-weight-bold text-black-50"><a class="text-primary" href="@Url.Action("Delete", "CategoriasMaragogi", new { Id = item.CategoriaMaragogiId })"><i class="fa fa-trash"></i></a></p></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Panel", "Home")" class="text-primary">Voltar</a>

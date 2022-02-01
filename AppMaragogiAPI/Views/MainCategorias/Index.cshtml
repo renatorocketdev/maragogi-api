@@ -1,0 +1,12 @@
+﻿@model IEnumerable<AppMaragogiAPI.Categorias>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@foreach (var item in Model)
+{
+    <a class="btn btn-primary m-2 col-12" href="@Url.Action("EditImages", "MainCategorias", new { MainCategoria = item.MainCategoria })" role="button">@item.MainCategoria</a>
+}

@@ -1,0 +1,1 @@
+SELECT DISTINCT MainCategoria FROM Categorias

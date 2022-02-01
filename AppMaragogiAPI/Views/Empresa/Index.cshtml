@@ -1,0 +1,67 @@
+﻿<div class="mt-2">
+    @using (Html.BeginForm("Index", "Empresa", FormMethod.Post))
+    {
+        <div class="form-row">
+            <div class="col">
+                <input type="text" class="form-control mt-2" id="validationServer01" placeholder="Empresa" name="nomeEmpresa" value="@Request.Form["nomeEmpresa"]" maxlength="50">
+            </div>
+            <div class="col">
+                <select class="custom-select mt-2" id="Categ" name="SubCategoria">
+                    <option class="bg-secondary text-white" value="">Selecione a categoria da empresa</option>
+                    @{
+                        List<string> Main = ViewBag.SubCategoria;
+
+                        foreach (var item in Main)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row mt-2">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary col-12">Pesquisar</button>
+            </div>
+        </div>
+    }
+</div>
+
+@if (IsPost)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Fotos</th>
+                <th scope="col">Logos</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                List<Empresa> empresa = ViewBag.Empresas;
+
+                foreach (var item in empresa)
+                {
+                    <tr>
+                        <th><p class="font-weight-bold text-black-50">@item.IdEmpresa</p></th>
+                        <td><p class="font-weight-bold text-black-50">@item.NomeEmpresa</p></td>
+                        <td><p class="font-weight-bold text-black-50">@item.SubCategoria</p></td>
+                        <td><p class="font-weight-bold text-black-50"><a class="text-primary" href="@Url.Action("EditImages", "Empresa", new { id =item.IdEmpresa})"><i class="fa fa-edit"></i></a></p></td>
+                        <td><p class="font-weight-bold text-black-50"><a class="text-primary" href="@Url.Action("EditIcon", "Empresa", new { id =item.IdEmpresa})"><i class="fa fa-edit"></i></a></p></td>
+                        <td><p class="font-weight-bold text-black-50"><a class="text-primary" href="@Url.Action("Edit", "Empresa", new { id =item.IdEmpresa})"><i class="fa fa-edit"></i></a></p></td>
+                        <td><p class="font-weight-bold text-black-50"><a class="text-primary" href="@Url.Action("Delete", "Empresa", new { Id = item.IdEmpresa})"><i class="fa fa-trash"></i></a></p></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+<a href="@Url.Action("Index", "Empresa")" class="text-primary">Voltar</a>
+

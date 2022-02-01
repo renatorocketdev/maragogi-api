@@ -1,0 +1,319 @@
+﻿@{
+    Layout = null;
+
+    var styleBG = "background-color:";
+    var styleColor = "color:";
+
+    var PrimaryColor = "#57A695";
+    var SecundaryColor = "#9DD3AF";
+    var LinkColor = "#FFF";
+
+    string CatPrincipal = "";
+
+    AppMaragogiDB db = new AppMaragogiDB();
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+
+    <link href="~/Content/clean-blog.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("", "Home", null)">App Maragogi</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        @Html.ActionLink("Empresas", "Empresas", null, null);
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead mb-1" style="background-image: url('../../Fotos/Slide/FundoIndex.jpg');height:325px">
+        <div class="overlay"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12W col-md-12 mx-auto">
+                    <div class="site-heading">
+                        @using (Html.BeginForm("Empresas", "", FormMethod.Post, new { enctype = "multipart/form-data", id = "formPesquisa" }))
+                        {
+                            <div class="form-row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" id="validationServer01" placeholder="Empresa" name="nomeEmpresa" value="@Request.Form["nomeEmpresa"]" maxlength="50">
+                                </div>
+                                <div class="col-6">
+                                    <select class="custom-select" id="Categ" name="Categ" required>
+                                        <option value="">Selecione a categoria da empresa</option>
+                                        <option class="bg-secondary text-white" value="" disabled>Aeroporto</option>
+                                        <option value="Aeroporto">Aeroporto</option>
+                                        <option class="bg-secondary text-white" value="" disabled>Beleza</option>
+                                        <option value="Cabeleireiro">Cabeleireiro</option>
+                                        <option value="Estética">Estética</option>
+                                        <option value="Manicure">Manicure</option>
+                                        <option value="Massagem">Massagem</option>
+                                        <option value="Salão">Salão</option>
+                                        <option class="bg-secondary text-white" value="" disabled>Comer</option>
+                                        <option value="Adega">Adega</option>
+                                        <option value="Cafe">Cafe</option>
+                                        <option value="Churrascaria">Churrascaria</option>
+                                        <option value="Restaurante">Restaurante</option>
+                                        <option value="Gourmet">Gourmet</option>
+                                        <option value="Hamburgueria">Hamburgueria</option>
+                                        <option value="Lanchonete">Lanchonete</option>
+                                        <option value="Oriental">Oriental</option>
+                                        <option value="Pizzaria">Pizzaria</option>
+                                        <option value="Sorveteria">Sorveteria</option>
+                                        <option class="bg-secondary text-white" value="" disabled>Comprar</option>
+                                        <option value="Artigos Religiosos">Artigos Religiosos</option>
+                                        <option value="Armazém Construção">Armazém Construção</option>
+                                        <option value="Artesanato">Artesanato</option>
+                                        <option value="Casa do Bolo">Casa do Bolo</option>
+                                        <option value="Farmácia">Farmácia</option>
+                                        <option value="Infantil">Infantil</option>
+                                        <option value="Moda">Moda</option>
+                                        <option value="Mercado">Mercado</option>
+                                        <option value="Padaria">Padaria</option>
+                                        <option value="Aves, Peixes e Carnes">Aves, Peixes e Carnes</option>
+                                        <option value="Produtos Naturais">Produtos Naturais</option>
+                                        <option class="bg-secondary text-white" value="" disabled>Diversão</option>
+                                        <option value="Diversão">Diversão</option>
+                                        <option class="bg-secondary text-white" value="" disabled>Dormir</option>
+                                        <option value="Resort">Resort</option>
+                                        <option value="Pousada">Pousada</option>
+                                        <option value="Hotel">Hotel</option>
+                                        <option value="Hostel">Hostel</option>
+                                        <option value="Flat">Flat</option>
+                                        <option value="Condomínio">Condomínio</option>
+                                        <option value="Imóveis Temporada">Imóveis Temporada</option>
+                                        <option class="bg-secondary text-white" value="" disabled>Eventos</option>
+                                        <option value="Eventos">Eventos</option>
+                                        <option class="bg-secondary text-white" value="" disabled>Locomover</option>
+                                        <option value="Agência de Viagens">Agência de Viagens</option>
+                                        <option value="Transporte Alternativo">Transporte Alternativo</option>
+                                        <option value="Transfer">Transfer</option>
+                                        <option value="Táxi">Táxi</option>
+                                        <option value="Moto Táxi">Moto Táxi</option>
+                                        <option value="Aluguel de Carros">Aluguel de Carros</option>
+                                        <option value="Aluguel de Bicicleta">Aluguel de Bicicleta</option>
+                                        <option class="bg-secondary text-white" value="" disabled>Passeios</option>
+                                        <option value="City Tours">City Tours</option>
+                                        <option value="Caiaque">Caiaque</option>
+                                        <option value="Buggy">Buggy</option>
+                                        <option value="Banana Boat">Banana Boat</option>
+                                        <option value="Stand Up">Stand Up</option>
+                                        <option value="Mergulho">Mergulho</option>
+                                        <option value="Lanchas">Lanchas</option>
+                                        <option value="Jangada">Jangada</option>
+                                        <option value="Gales">Gales</option>
+                                        <option value="Eco Turism">Eco Turismo</option>
+                                        <option class="bg-secondary text-white" value="" disabled>Saúde</option>
+                                        <option value="Upa">Upa</option>
+                                        <option value="Ultrassom">Ultrassom</option>
+                                        <option value="Laboratório">Laboratório</option>
+                                        <option value="Fisioterapia">Fisioterapia</option>
+                                        <option value="Dentista">Dentista</option>
+                                        <option value="Cardiologista">Cardiologista</option>
+                                        <option value="Consultório">Consultório</option>
+                                        <option class="bg-secondary text-white" value="" disabled>Serviços</option>
+                                        <option value="Cartório">Cartório</option>
+                                        <option value="Carpintaria">Carpintaria</option>
+                                        <option value="Capotaria">Capotaria</option>
+                                        <option value="Auto Peças">Auto Peças</option>
+                                        <option value="Auto Escola">Auto Escola</option>
+                                        <option value="Academia">Academia</option>
+                                        <option value="Educação">Educação</option>
+                                        <option value="Delicias Maragogi">Delicias Maragogi</option>
+                                        <option value="Contabilidade">Contabilidade</option>
+                                        <option value="Construtora">Construtora</option>
+                                        <option value="Conserto de Computador">Conserto de Computador</option>
+                                        <option value="Conserto de Celular">Conserto de Celular</option>
+                                        <option value="Lavanderia">Lavanderia</option>
+                                        <option value="Lan House">Lan House</option>
+                                        <option value="Gesseiro">Gesseiro</option>
+                                        <option value="Gás">Gás</option>
+                                        <option value="Encanador">Encanador</option>
+                                        <option value="Eletricista">Eletricista</option>
+                                        <option value="Refrigeração">Refrigeração</option>
+                                        <option value="Provedor Internet">Provedor Internet</option>
+                                        <option value="Pintor">Pintor</option>
+                                        <option value="Petshop">Petshop</option>
+                                        <option value="Pedreiro">Pedreiro</option>
+                                        <option value="Moto Peças">Moto Peças</option>
+                                        <option value="Vidracaria">Vidracaria</option>
+                                        <option value="Tatuagem">Tatuagem</option>
+                                        <option value="Locutor">Locutor</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row mt-2">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary col-12">Pesquisar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    @{
+        var nomeEmpresa = @Request.Form["nomeEmpresa"];
+        var Categoria = @Request.Form["Categ"];
+    }
+
+    @if (IsPost)
+    {
+        #region Beleza
+        if (Categoria == "Cabeleireiro" || Categoria == "Estética" || Categoria == "Manicure" || Categoria == "Massagem" || Categoria == "Salão")
+        {
+            CatPrincipal = "Beleza";
+        }
+        #endregion
+
+        #region Comer
+        if (Categoria == "Adega" || Categoria == "Cafe" || Categoria == "Churrascaria" || Categoria == "Restaurante" || Categoria == "Gourmet" || Categoria == "Hamburgueria" || Categoria == "Lanchonete" || Categoria == "Oriental" || Categoria == "Pizzaria" || Categoria == "Sorveteria")
+        {
+            CatPrincipal = "Comer";
+        }
+        #endregion
+
+        #region Comprar
+        if (Categoria == "Artigos Religiosos" || Categoria == "Armazém Construção" || Categoria == "Artesanato" || Categoria == "Casa do Bolo" || Categoria == "Farmácia" || Categoria == "Infantil" || Categoria == "Moda" || Categoria == "Mercado" || Categoria == "Padaria" || Categoria == "Aves, Peixes e Carnes" || Categoria == "Produtos Naturais")
+        {
+            CatPrincipal = "Comprar";
+        }
+        #endregion
+
+        #region Dormir
+        if (Categoria == "Resort" || Categoria == "Pousada" || Categoria == "Hotel" || Categoria == "Hostel" || Categoria == "Flat" || Categoria == "Condomínio" || Categoria == "Imóveis Temporada")
+        {
+            CatPrincipal = "Dormir";
+        }
+        #endregion
+
+        #region Diversão
+        if (Categoria == "Parque Aquático" || Categoria == "Vida Noturna" || Categoria == "Zoológico" || Categoria == "Paintball")
+        {
+            CatPrincipal = "Diversao";
+        }
+        #endregion
+
+        #region Locomover
+        if (Categoria == "Agência de Viagens" || Categoria == "Transporte Alternativo" || Categoria == "Transfer" || Categoria == "Táxi" || Categoria == "Moto Táxi" || Categoria == "Aluguel de Carros" || Categoria == "Aluguel de Bicicletas")
+        {
+            CatPrincipal = "Locomover";
+        }
+        #endregion
+
+        #region Passeios
+        if (Categoria == "City Tours" || Categoria == "Caiaque" || Categoria == "Buggy" || Categoria == "Banana Boat" || Categoria == "Stand Up" || Categoria == "Mergulho" || Categoria == "Lanchas" || Categoria == "Janguada" || Categoria == "Gales" || Categoria == "Eco Turism")
+        {
+            CatPrincipal = "Passeios";
+        }
+        #endregion
+
+        #region Saúde
+        if (Categoria == "Upa" || Categoria == "Ultrassom" || Categoria == "Fisioterapia" || Categoria == "Dentista" || Categoria == "Cardiologia" || Categoria == "Consultório")
+        {
+            CatPrincipal = "Saude";
+        }
+        #endregion
+
+        #region Serviços
+        if (Categoria == "Cartório" || Categoria == "Carpintaria" || Categoria == "Capotaria" || Categoria == "Auto Peças" || Categoria == "Auto Escola" || Categoria == "Academia" || Categoria == "Educação" || Categoria == "Delicias Maragogi" || Categoria == "Contabilidade" || Categoria == "Construtora" || Categoria == "Conserto de Computador" || Categoria == "Conserto de Celular" || Categoria == "Lavanderia" || Categoria == "Lan House" || Categoria == "Gesseiro" || Categoria == "Gás" || Categoria == "Encanador" || Categoria == "Eletricista" || Categoria == "Refrigeração" || Categoria == "Provedor de Internet" || Categoria == "Pintor" || Categoria == "Petshop" || Categoria == "Pedreiro" || Categoria == "Moto Peças" || Categoria == "Vidraçaria" || Categoria == "Tatuagem" || Categoria == "Locutor")
+        {
+            CatPrincipal = "Servicos";
+        }
+        #endregion
+
+        db.Database.Connection.Open();
+        string cmdSelect = string.Format("SELECT * FROM Empresa WHERE Categoria='{0}'", Categoria);
+
+        //db.Database.ExecuteSqlCommand(cmdSelect);
+
+        AppMaragogiAPI.Empresa[] Empresas = db.Empresa.SqlQuery(cmdSelect).ToArray();
+
+        //Server.MapPath(string.Format("~/Fotos/Empresas/{0}/", CatPrincipal)), string.Format("{0}*", Empresas[0].NomeEmpresa.Replace(" ", "")))
+
+        
+
+        <div class="container">
+            <div class="row">
+                @for (int i = 0; i < Empresas.Length; i++)
+                {
+                    var arquivo = Directory.GetFiles(Server.MapPath(string.Format("~/Fotos/Empresas/{0}/", CatPrincipal)), string.Format("{0}*", Empresas[i].NomeEmpresa.Replace(" ", "")));
+
+                    <div class="col-4">
+                        <div class="card m-2 text-center" style="width: 22rem;">
+                            <img src="@string.Format("../../{0}", arquivo[0].Substring(38))" class="card-img-top" alt="..." style="width: 22rem; height: 22rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@Empresas[i].NomeEmpresa</h5>
+                            </div>
+                            <ul class="list-group list-group-flush p-3">
+                                <li class="list-group-item"><i class="fa fa-star" style="color:gold"></i> @Empresas[i].Serv1</li>
+                                <li class="list-group-item"><i class="fa fa-star" style="color:gold"></i> @Empresas[i].Carac1</li>
+                            </ul>
+                            <div class="card-body text-center p-2">
+                                <a href=@Url.Action("SobreEmpresa", "Home", new { id =Empresas[i].IdEmpresa}) class="btn btn-primary col-6">
+                                    Acesse
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        db.Database.Connection.Close();
+    }
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</body>
+</html>
+
+
+@*<table class="table table-hover">
+        <thead style="@string.Format("{0}{1};{2}#FFF", styleBG, PrimaryColor, styleColor)">
+            <tr>
+                <th scope="col">Nome Empresa</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>*@
+
+@*<tr>
+        <td>
+            <a href=@Url.Action("SobreEmpresa", "Home", new { id =tste[i].IdEmpresa}) class="col-4">
+                @tste[i].NomeEmpresa
+            </a>
+        </td>
+        <td>@tste[i].Endereco</td>
+        <td>
+            <a href=@Url.Action("EditarEmpresa", "Home", new { id =tste[i].IdEmpresa}) class="col-4">
+                <i class="fa fa-edit" style="@string.Format("{0}{1}", styleColor, PrimaryColor)"></i>
+            </a>
+        </td>
+    </tr>*@
+
+

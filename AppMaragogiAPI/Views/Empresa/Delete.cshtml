@@ -1,0 +1,25 @@
+﻿@model AppMaragogiAPI.Empresa
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Empresa</h4>
+    <hr />
+
+    @using (Html.BeginForm("Delete", "Empresa"))
+    {
+        <p>@Model.NomeEmpresa</p>
+
+        <input class="invisible" type="number" name="IdEmpresa" value="@Model.IdEmpresa" />
+
+        <div class="form-group">
+            <input class="form-control" name="Token" placeholder="Token de Segurança" />
+        </div>
+
+        <div class="form-actions no-color">
+            <a href="@Url.Action("Index", "Empresa")" class="text-primary">Voltar</a>
+            <input type="submit" value="Delete" class="col-11 btn btn-default" />
+        </div>
+    }
+</div>

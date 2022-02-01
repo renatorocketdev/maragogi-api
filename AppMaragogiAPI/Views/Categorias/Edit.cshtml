@@ -1,0 +1,50 @@
+﻿@model AppMaragogiAPI.Categorias
+
+@using (Html.BeginForm("Edit", "Categorias", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Categorias</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CategoriaId)
+
+        <div class="form-group">
+            <select class="custom-select mt-2" id="Categ" name="MainCategoria" required>
+                <option value="">Selecione a categoria principal da empresa</option>
+                <option value="Beleza">Beleza</option>
+                <option value="Comer">Comer</option>
+                <option value="Comprar">Comprar</option>
+                <option value="Dormir">Dormir</option>
+                <option value="Diversão">Diversão</option>
+                <option value="Eventos">Eventos</option>
+                <option value="Locomover">Locomover</option>
+                <option value="Saúde">Saúde</option>
+                <option value="Serviços">Serviços</option>
+                <option value="Passeios">Passeios</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubCategoria, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-6">
+                @Html.EditorFor(model => model.SubCategoria, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SubCategoria, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <input hidden="hidden" name="OldName" value="@Model.SubCategoria">
+
+        <div class="form-group">
+            <input class="form-control" name="Token" placeholder="Token de Segurança" />
+        </div>
+
+        <div class="form-group">
+            <div class="col-12">
+                <a href="@Url.Action("Index", "Categorias")" class="text-primary">Voltar</a>
+                <input type="submit" value="Editar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,44 @@
+﻿@model AppMaragogiAPI.Empresa
+
+@{
+    if (Model.Icone != null)
+    {
+        var base64 = Convert.ToBase64String(Model.Icone);
+        var imgSrc = String.Format("data:image/png;base64,{0}", base64);
+
+        <div class="col text-center mt-5">
+            <img src="@imgSrc" class="col card-img-top" style="height:500px;width:500px">
+        </div>
+    }
+    else
+    {
+        <div class="col-10 offset-1 mt-5">
+            <div class="alert alert-warning text-center" role="alert">
+                <b>Nenhuma Logo</b>
+            </div>
+        </div>
+    }
+}
+
+@using (Html.BeginForm("EditIcon", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input class="invisible" type="number" name="IdEmpresa" value="@Model.IdEmpresa" />
+
+    <div class="form-group">
+        <input class="form-control" name="Token" placeholder="Token de Segurança" />
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button class="btn btn-outline-success" type="submit" id="inputGroupFileAddon03">Enviar</button>
+        </div>
+        <div class="custom-file">
+            <input type="file" name="file" class="custom-file-input" id="inputGroupFile03">
+            <label class="custom-file-label" for="inputGroupFile03">Escolha um arquivo</label>
+        </div>
+    </div>
+}
+
+<a href="@Url.Action("Index", "Empresa")" class="text-primary">Voltar</a>
+
+

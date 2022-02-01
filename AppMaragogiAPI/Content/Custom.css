@@ -1,0 +1,22 @@
+﻿#HeaderPrincipal {
+    background-image: url('../Fotos/Slide/FundoIndex.jpg');
+    height: 750px;
+}
+
+#containerDescricao {
+    background-image: url('../Fotos/Slide/FundoSobreEmpresas.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 800px;
+    opacity: 1;
+}
+
+#containerDescricao h3, h6 {
+    margin: 50px 0px 0px 0px;
+    text-align: center;
+}
+
+#separador {
+    width:100%;
+    border: 1px solid #FFF;
+}
